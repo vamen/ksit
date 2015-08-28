@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ksit</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="Refresh">refresh</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+     <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fromtag">From :</string>
+    <string name="totag">To :</string>
+
+</resources>

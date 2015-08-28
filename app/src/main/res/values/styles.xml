@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primarycolor</item>
+        <item name="colorPrimaryDark">@color/primarycolordark</item>
+        <item name="android:textColorPrimary">#030348</item>
+    </style>
+    <style name="Recycletheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primarycolordark</item>
+    </style>
+    <style name="Mycolorstyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">#feffffff</item>
+        <item name="android:textColorSecondary">#82494949</item>
+    </style>
+
+
+</resources>
