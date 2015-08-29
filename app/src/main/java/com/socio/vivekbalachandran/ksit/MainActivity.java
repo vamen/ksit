@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements mediater{
          transaction=fragmentManager.beginTransaction();
         transaction.add(R.id.rlayout, fragment, "frameactivity");
         transaction.commit();
-
+        if(savedInstanceState==null)
+            drawer.opensorclose(true);
         Log.i("debug","oncreate");
 
     }
