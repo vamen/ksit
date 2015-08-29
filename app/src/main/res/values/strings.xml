@@ -12,6 +12,7 @@
     <string name="fromtag">From :</string>
     <string name="totag">To :</string>
     <string name="title_activity_setting">About app</string>
+    <string name="descrpition">Our app is a unit converter.  It is a Simple unit conversation Application with Simple User Interface.  The app is intuitive and very helpful.   It also acts as a pocket converter.  The app has 8 categories of essential units.  Designed to all users and it is simply the best....</string>
 
 
 </resources>
