@@ -4,7 +4,7 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
-        applicationId "com.socio.vivekbalachandran.ksit"
+        applicationId "com.socio.vivekbalachandran.ConverterApp"
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1

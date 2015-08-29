@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Converter</string>
+    <string name="app_name">Converter App</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">AboutApp</string>
     <string name="Refresh">refresh</string>
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
@@ -11,5 +11,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fromtag">From :</string>
     <string name="totag">To :</string>
+    <string name="title_activity_setting">About app</string>
+
 
 </resources>

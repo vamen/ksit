@@ -12,7 +12,8 @@
     </style>
     <style name="Mycolorstyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColorPrimary">#feffffff</item>
-        <item name="android:textColorSecondary">#82494949</item>
+        <item name="android:textColorSecondary">#feffffff</item>
+
     </style>
 
 

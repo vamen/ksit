@@ -47,7 +47,7 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
     private boolean mfromsavedinstancestate;
     private View continerview;
     private RecyclerView recyclerView;
-    mediater med;
+    Mediater med;
     Context context;
     public NavigationFragment() {
         // Required empty public constructor
@@ -85,7 +85,7 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
 
 
-        View rootview = inflater.inflate(R.layout.fragment_blank, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) rootview.findViewById(R.id.drawerlist);
 
 
@@ -105,7 +105,7 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        med=(mediater)getActivity();
+        med=(Mediater)getActivity();
     }
     public void setup(int fragmentid, DrawerLayout drawerLayout, final Toolbar toolbar) {
         //get the view of the fragment

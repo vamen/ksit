@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.*;
 import android.os.Process;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,41 +22,40 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.io.FileOutputStream;
 
 /**
  * Created by Vivek Balachandran on 8/10/2015.
  */
-public  class dataprovider implements Runnable {
+public  class Dataprovider implements Runnable {
 
 
     public static double value[] = new double[32];
 
     URL url;
-    public static dataprovider instance=null;
+    public static Dataprovider instance=null;
     HttpURLConnection urlConnection;
     String datacaststring;
     final static String filename="valuefile.txt";
     Context ctx;
 
-    public static dataprovider getInstence(Context ctx,Bundle savedInstancestate)
+    public static Dataprovider getInstence(Context ctx,Bundle savedInstancestate)
     {
 
         if(instance==null)
         {
-            instance=new dataprovider(ctx,savedInstancestate);
+            instance=new Dataprovider(ctx,savedInstancestate);
             return instance;
         }
 
         return instance;
     }
 
-    private   dataprovider(Context ctx,Bundle savedInstancestate)
+    private Dataprovider(Context ctx, Bundle savedInstancestate)
     {
         this.ctx=ctx;
 
              if(getPreferencestatus()) {
-                 run();
+                run();
                  Log.e("debug", "************datagetting***********");
              }
     }
@@ -73,7 +71,7 @@ public  class dataprovider implements Runnable {
         return ischecked;
     }
 
-    private dataprovider()
+    private Dataprovider()
     {
 
     }
@@ -114,20 +112,20 @@ public  class dataprovider implements Runnable {
    public void readvalue(double[] value)
    {
        FileInputStream fileInputStream=null;
-       byte[] b=new byte[dataprovider.value.length];
+       byte[] b=new byte[Dataprovider.value.length];
        Log.d("FILEI/O","reading from file");
        try {
            fileInputStream=ctx.openFileInput(filename);
            double read;
            DataInputStream dataInputStream=new DataInputStream(fileInputStream);
-           for (int i=0;i< dataprovider.value.length;i++) {
+           for (int i=0;i< Dataprovider.value.length;i++) {
                read =dataInputStream.readDouble();
                if (read == -1) {
                    Log.d("FILE", filename + " is empty");
-                   i= dataprovider.value.length;
+                   i= Dataprovider.value.length;
 
                } else {
-                   dataprovider.value[i] = read;
+                   Dataprovider.value[i] = read;
 
                }
            }

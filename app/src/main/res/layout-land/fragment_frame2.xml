@@ -3,7 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
     <TextView
         android:id="@+id/confromtext"
         android:layout_width="match_parent"
@@ -35,7 +40,7 @@
 
         <EditText
             android:id="@+id/coninputText"
-            android:layout_width="220dp"
+            android:layout_width="322dp"
             android:layout_height="48dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -47,7 +52,7 @@
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/conspinner"
-            android:layout_width="130dp"
+            android:layout_width="220dp"
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -93,14 +98,14 @@
 
         <TextView
             android:id="@+id/conoutputtext"
-            android:layout_width="226dp"
+            android:layout_width="309dp"
             android:layout_height="48dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/conspinner2"
-            android:layout_width="130dp"
+            android:layout_width="226dp"
             android:layout_height="48dp"
             android:layout_alignRight="@+id/conwrapper2"
             android:layout_gravity="right"
@@ -124,5 +129,6 @@
         android:paddingLeft="10dp"
         android:layout_alignParentTop="true"
         android:textStyle="italic"/>
-
+   </RelativeLayout>
+   </ScrollView>
 </RelativeLayout>

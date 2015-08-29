@@ -13,7 +13,7 @@ import android.widget.Toast;
 /**
  * Created by Vivek Balachandran on 8/28/2015.
  */
-public class frame2 extends android.support.v4.app.Fragment {
+public class MeasurementConverter extends android.support.v4.app.Fragment {
 
     public String[] conlist = {
 
@@ -50,18 +50,18 @@ public class frame2 extends android.support.v4.app.Fragment {
         editText = (EditText) root.findViewById(R.id.coninputText);
         textView = (TextView) root.findViewById(R.id.conoutputtext);
         appCompatButton = (android.support.v7.widget.AppCompatButton) root.findViewById(R.id.conbutton);
-        text1=(TextView)root.findViewById(R.id.textView1);
+        text1 = (TextView) root.findViewById(R.id.textView1);
         text1.setText(conlist[conposition]);
 
         android.support.v7.widget.AppCompatSpinner spinner1 = (android.support.v7.widget.AppCompatSpinner) root.findViewById(R.id.conspinner);
-        ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, staticdataprovider.data[conposition]);
+        ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, StaticDataproviderforMesurment.data[conposition]);
         spinner1.setAdapter(adapter);
         android.support.v7.widget.AppCompatSpinner spinner2 = (android.support.v7.widget.AppCompatSpinner) root.findViewById(R.id.conspinner2);
         spinner2.setAdapter(adapter);
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "pos" + position + staticdataprovider.data[conposition][position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "pos" + position + StaticDataproviderforMesurment.data[conposition][position], Toast.LENGTH_SHORT).show();
                 pos1 = position;
 
             }
@@ -74,7 +74,7 @@ public class frame2 extends android.support.v4.app.Fragment {
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "pos" + position + staticdataprovider.data[conposition][position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "pos" + position + StaticDataproviderforMesurment.data[conposition][position], Toast.LENGTH_SHORT).show();
                 pos2 = position;
 
             }
@@ -88,24 +88,23 @@ public class frame2 extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 if (!editText.getText().toString().matches("")) {
-                    double enetredvalue=Double.valueOf(editText.getText().toString());
+                    double enetredvalue = Double.valueOf(editText.getText().toString());
 
-                    Toast.makeText(getActivity(), "clickedgo with value "+enetredvalue, Toast.LENGTH_SHORT).show();
-                    double convertedvalue=staticdataprovider.getconvertval(enetredvalue,conposition,pos1, pos2 );
+                    Toast.makeText(getActivity(), "clickedgo with value " + enetredvalue, Toast.LENGTH_SHORT).show();
+                    double convertedvalue = StaticDataproviderforMesurment.getconvertval(enetredvalue, conposition, pos1, pos2);
                     textView.setText(String.valueOf(convertedvalue));
 
-                }
-                else if(editText.getText().toString().matches("")){
+                } else if (editText.getText().toString().matches("")) {
 
-                    double convertedvalue=staticdataprovider.getconvertval(1,conposition,pos1,pos2);
+                    double convertedvalue = StaticDataproviderforMesurment.getconvertval(1, conposition, pos1, pos2);
                     textView.setText(String.valueOf(convertedvalue));
 
                     Toast.makeText(getActivity(), "clickedgo with null string", Toast.LENGTH_SHORT).show();
                 }
 
 
-                Toast.makeText(getActivity(), " " + staticdataprovider.data[conposition][pos1] +
-                        " to " + staticdataprovider.data[conposition][pos2], Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), " " + StaticDataproviderforMesurment.data[conposition][pos1] +
+                        " to " + StaticDataproviderforMesurment.data[conposition][pos2], Toast.LENGTH_SHORT).show();
             }
         });
     }

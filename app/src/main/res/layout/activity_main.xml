@@ -36,9 +36,9 @@ android:layout_height="fill_parent"
     <fragment
         android:layout_width="@dimen/nab_drawer_size"
         android:layout_height="match_parent"
-        app:layout="@layout/fragment_blank"
+        app:layout="@layout/fragment_navigation_drawer"
         android:layout_gravity="start"
         android:id="@+id/navigation"
         android:name="com.socio.vivekbalachandran.ksit.NavigationFragment"
-        tools:layout="@layout/fragment_blank"/>
+        tools:layout="@layout/fragment_navigation_drawer"/>
 </android.support.v4.widget.DrawerLayout>

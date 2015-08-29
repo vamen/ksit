@@ -20,7 +20,7 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class frameactivity extends android.support.v4.app.Fragment {
+public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
 
 
     public static String[] curencyString1 =
@@ -36,13 +36,13 @@ public class frameactivity extends android.support.v4.app.Fragment {
     public  static int pos1=0;
     public static int pos2=0;
     Context ctx;
-    dataprovider ob;
+    Dataprovider ob;
     View root;
 
 
 
 
-    public frameactivity() {
+    public CurrencyConvertFragment() {
         // Required empty public constructor
 
     }
@@ -57,7 +57,7 @@ public class frameactivity extends android.support.v4.app.Fragment {
     }
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        ob = dataprovider.getInstence(getActivity().getApplicationContext(),savedInstanceState);
+        ob = Dataprovider.getInstence(getActivity().getApplicationContext(), savedInstanceState);
         final EditText inputtext = (EditText) root.findViewById(R.id.inputText);
         inputtext.setHint("1");
         final TextView result=(TextView)root.findViewById(R.id.outputtext);

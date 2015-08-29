@@ -1,32 +1,26 @@
 package com.socio.vivekbalachandran.ksit;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
-import static com.socio.vivekbalachandran.ksit.dataprovider.*;
+import static com.socio.vivekbalachandran.ksit.Dataprovider.*;
 //import android.widget.Toolbar;
 
 
-public class MainActivity extends AppCompatActivity implements mediater{
+public class MainActivity extends AppCompatActivity implements Mediater {
 
 
 
     android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction transaction;
-    frameactivity fragment;
+    CurrencyConvertFragment fragment;
     NavigationFragment drawer;
 
 
@@ -36,14 +30,14 @@ public class MainActivity extends AppCompatActivity implements mediater{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_appbaroverlays);
         toolbar=(Toolbar)findViewById(R.id.act_bar);
-         savestate=savedInstanceState;
+
         setSupportActionBar(toolbar);
       //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         drawer =(NavigationFragment)getSupportFragmentManager().findFragmentById(R.id.navigation);
 
         drawer.setup(R.id.navigation, (DrawerLayout) findViewById(R.id.nav_activity), toolbar);
-         fragment=new frameactivity();
+         fragment=new CurrencyConvertFragment();
          fragmentManager=getSupportFragmentManager();
          transaction=fragmentManager.beginTransaction();
         transaction.add(R.id.rlayout, fragment, "frameactivity");
@@ -72,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements mediater{
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent=new Intent(this,SettingActivity.class);
+            startActivity(intent);
             return true;
 
         }
@@ -88,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements mediater{
     public void responce(int position) {
 
         if(position!=0) {
-            frame2 fragment1 = new frame2();
+            MeasurementConverter fragment1 = new MeasurementConverter();
             fragment1.setvalueofpositon(position-1);
             transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.rlayout, fragment1, "fragment");
