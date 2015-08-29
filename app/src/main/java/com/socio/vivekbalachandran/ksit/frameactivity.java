@@ -20,7 +20,7 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class frameactivity extends Fragment {
+public class frameactivity extends android.support.v4.app.Fragment {
 
 
     public static String[] curencyString1 =
@@ -37,7 +37,7 @@ public class frameactivity extends Fragment {
     public static int pos2=0;
     Context ctx;
     dataprovider ob;
-
+    View root;
 
 
 
@@ -51,7 +51,12 @@ public class frameactivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_frameactivity, container, false);
+         root = inflater.inflate(R.layout.fragment_frameactivity, container, false);
+
+        return root;
+    }
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
         ob = dataprovider.getInstence(getActivity().getApplicationContext());
         final EditText inputtext = (EditText) root.findViewById(R.id.inputText);
         inputtext.setHint("1");
@@ -127,7 +132,6 @@ public class frameactivity extends Fragment {
                 }
             }
         });
-        return root;
     }
 
 

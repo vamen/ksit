@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,8 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
     private boolean mfromsavedinstancestate;
     private View continerview;
     private RecyclerView recyclerView;
-
+    mediater med;
+    Context context;
     public NavigationFragment() {
         // Required empty public constructor
     }
@@ -75,7 +77,7 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
             //if user Have opend the fragment for first time
             mfromsavedinstancestate = true;
         }
-
+        context=getActivity();
 
     }
 
@@ -88,6 +90,7 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
         View rootview = inflater.inflate(R.layout.fragment_blank, container, false);
         recyclerView = (RecyclerView) rootview.findViewById(R.id.drawerlist);
 
+
         myadapter = new Myadapter(getActivity(), conlist);
         recyclerView.setAdapter(myadapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -98,10 +101,14 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
                         .marginResId(R.dimen.leftmargin, R.dimen.rightmargin)
                         .build());*/
 
-
+        Log.i("debug", "********oncreateview in navigation fragment*********");
         return rootview;
     }
-
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        med=(mediater)getActivity();
+    }
     public void setup(int fragmentid, DrawerLayout drawerLayout, final Toolbar toolbar) {
         //get the view of the fragment
         continerview = getActivity().findViewById(fragmentid);
@@ -197,8 +204,10 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
 
             @Override
             public void onClick(View v) {
-                int position = getPosition();
+                int position = getAdapterPosition();
                 Toast.makeText(getActivity(), "hello at pos" + position, Toast.LENGTH_SHORT).show();
+                callinterface(position);
+
             }
 
 
@@ -206,6 +215,9 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
 
 
     }
-
+    public void callinterface(int i)
+    {
+        med.responce(i);
+    }
 
 }

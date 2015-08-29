@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/confromtext"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="20dp"
+        android:paddingTop="50dp"
+        android:singleLine="true"
+        android:text="@string/fromtag"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <FrameLayout
+        android:id="@+id/conwrapper1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="120dp"
+
+        >
+
+        <EditText
+            android:id="@+id/coninputText"
+            android:layout_width="220dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/confromtext"
+            android:ems="10"
+            android:imeOptions="actionGo"
+
+            android:inputType="number" />
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/conspinner"
+            android:layout_width="130dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right|center_vertical"
+
+
+            android:layout_toRightOf="@+id/coninputText"
+
+            android:backgroundTintMode="multiply" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/contextviewto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/conwrapper1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/totag"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30dp" />
+
+    <FrameLayout
+        android:id="@+id/conwrapper2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contextviewto"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/conoutputtext"
+            android:layout_width="226dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/conspinner2"
+            android:layout_width="130dp"
+            android:layout_height="48dp"
+            android:layout_alignRight="@+id/conwrapper2"
+            android:layout_gravity="right"
+            android:backgroundTint="@color/abc_secondary_text_material_light"
+            android:spinnerMode="dropdown"
+
+            />
+    </FrameLayout>
+
+</RelativeLayout>
