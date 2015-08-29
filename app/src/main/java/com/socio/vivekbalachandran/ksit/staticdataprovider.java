@@ -1,5 +1,7 @@
 package com.socio.vivekbalachandran.ksit;
 
+import android.util.Log;
+
 /**
  * Created by Vivek Balachandran on 8/29/2015.
  */
@@ -71,11 +73,46 @@ public  class staticdataprovider {
      };
 
 
-        public static double getconvertval(double init,int conpos,int pos1,int pos2)
-        {
-                double conv=0;
-                conv=(init/value[conpos][pos1])*value[conpos][pos2];
+        public static double getconvertval(double init,int conpos,int pos1,int pos2) {
+            double conv = 0;
+            if (conpos != 1) {
+                conv = (init / value[conpos][pos1]) * value[conpos][pos2];
                 return conv;
+            }
+            else {
+                Log.d("debug","***********debugger************");
+                if(pos1==0&&pos2==0)
+                {
+                    conv=init;
+                }
+                if(pos1==0&&pos2==1){
+                    conv=init+272.15;
+
+                }
+                if(pos1==0&&pos2==2){
+                    conv=init*1.8+32;
+
+                }
+                if(pos1==1&&pos2==0){
+                    conv=init-272.15;
+                }
+                if(pos1==1&&pos2==1){
+                    conv=init;
+                }
+                if(pos1==1&&pos2==2){
+                    conv=(init+273)*1.8+32;
+                }
+                if(pos1==2&&pos2==0){
+                    conv=(init-32)/1.8;
+                }
+                if(pos1==2&&pos2==1){
+                    conv=((init-32)/1.8)+272.15;
+                }
+                if(pos1==2&&pos2==2){
+                    conv=init;
+                }
+                return conv;
+            }
         }
 
 

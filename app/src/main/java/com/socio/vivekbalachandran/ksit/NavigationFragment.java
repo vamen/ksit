@@ -156,9 +156,12 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
 
     }
 
-    public void run() {
-        mdrawerlayout.openDrawer(continerview);
+    public void opensorclose(boolean val) {
+
+        if(val)mdrawerlayout.openDrawer(continerview);
+        else mdrawerlayout.closeDrawer(continerview);
     }
+
 
     public class Myadapter extends RecyclerView.Adapter<Myadapter.myViewholder> {
         String[] arlist;
@@ -204,6 +207,7 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 int position = getAdapterPosition();
                 Toast.makeText(getActivity(), "hello at pos" + position, Toast.LENGTH_SHORT).show();
+
                 callinterface(position);
 
             }

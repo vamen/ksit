@@ -1,6 +1,7 @@
 package com.socio.vivekbalachandran.ksit;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.*;
 import android.os.Process;
 import android.util.Log;
@@ -29,30 +30,49 @@ import java.io.FileOutputStream;
  */
 public  class dataprovider implements Runnable {
 
+
     public static double value[] = new double[32];
+
     URL url;
     public static dataprovider instance=null;
     HttpURLConnection urlConnection;
     String datacaststring;
     final static String filename="valuefile.txt";
     Context ctx;
-    public static dataprovider getInstence(Context ctx)
+
+    public static dataprovider getInstence(Context ctx,Bundle savedInstancestate)
     {
 
         if(instance==null)
         {
-            instance=new dataprovider(ctx);
+            instance=new dataprovider(ctx,savedInstancestate);
             return instance;
         }
 
         return instance;
     }
 
-    private   dataprovider(Context ctx)
+    private   dataprovider(Context ctx,Bundle savedInstancestate)
     {
         this.ctx=ctx;
-        run();
+
+             if(getPreferencestatus()) {
+                 run();
+                 Log.e("debug", "************datagetting***********");
+             }
     }
+
+    private boolean getPreferencestatus() {
+
+        Log.e("debug", "************datagetting***********");
+        SharedPreferences preferences=ctx.getSharedPreferences("START",Context.MODE_PRIVATE);
+        boolean ischecked=preferences.getBoolean("STARTKEY", false);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putBoolean("STARTKEY",true);
+        editor.commit();
+        return ischecked;
+    }
+
     private dataprovider()
     {
 
@@ -63,6 +83,7 @@ public  class dataprovider implements Runnable {
 
    public void writefile(double value[])
    {
+
        FileOutputStream fileOutputStream=null;
        DataOutputStream dataOutputStream;
        try {

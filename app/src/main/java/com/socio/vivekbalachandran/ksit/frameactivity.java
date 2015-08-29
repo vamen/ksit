@@ -57,7 +57,7 @@ public class frameactivity extends android.support.v4.app.Fragment {
     }
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        ob = dataprovider.getInstence(getActivity().getApplicationContext());
+        ob = dataprovider.getInstence(getActivity().getApplicationContext(),savedInstanceState);
         final EditText inputtext = (EditText) root.findViewById(R.id.inputText);
         inputtext.setHint("1");
         final TextView result=(TextView)root.findViewById(R.id.outputtext);

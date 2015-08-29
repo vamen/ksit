@@ -27,16 +27,19 @@ public class MainActivity extends AppCompatActivity implements mediater{
     android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction transaction;
     frameactivity fragment;
+    NavigationFragment drawer;
 
 
     private Toolbar toolbar;
+    Bundle savestate;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_appbaroverlays);
         toolbar=(Toolbar)findViewById(R.id.act_bar);
+         savestate=savedInstanceState;
         setSupportActionBar(toolbar);
       //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        NavigationFragment drawer;
+
         drawer =(NavigationFragment)getSupportFragmentManager().findFragmentById(R.id.navigation);
 
         drawer.setup(R.id.navigation, (DrawerLayout) findViewById(R.id.nav_activity), toolbar);
@@ -45,8 +48,7 @@ public class MainActivity extends AppCompatActivity implements mediater{
          transaction=fragmentManager.beginTransaction();
         transaction.add(R.id.rlayout, fragment, "frameactivity");
         transaction.commit();
-        if(savedInstanceState==null)
-            drawer.run();
+
         Log.i("debug","oncreate");
 
     }
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements mediater{
 
         }
         if (id == R.id.refresh) {
-             getInstence(getBaseContext()).ncalls();
+             getInstence(getBaseContext(),savestate).ncalls();
             Toast.makeText(this,"refreshed",Toast.LENGTH_SHORT).show();
         }
 
@@ -94,9 +96,11 @@ public class MainActivity extends AppCompatActivity implements mediater{
         if(position==0)
         {
             transaction=fragmentManager.beginTransaction();
-            transaction.replace(R.id.rlayout,fragment,"frameactivity");
+            transaction.replace(R.id.rlayout, fragment, "frameactivity");
             transaction.commit();
 
         }
+
+            drawer.opensorclose(false);
     }
 }
