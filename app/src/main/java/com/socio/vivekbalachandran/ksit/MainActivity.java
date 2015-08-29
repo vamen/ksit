@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements mediater{
 
     android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction transaction;
-
+    frameactivity fragment;
 
 
     private Toolbar toolbar;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements mediater{
         drawer =(NavigationFragment)getSupportFragmentManager().findFragmentById(R.id.navigation);
 
         drawer.setup(R.id.navigation, (DrawerLayout) findViewById(R.id.nav_activity), toolbar);
-        frameactivity fragment=new frameactivity();
+         fragment=new frameactivity();
          fragmentManager=getSupportFragmentManager();
          transaction=fragmentManager.beginTransaction();
         transaction.add(R.id.rlayout, fragment, "frameactivity");
@@ -84,11 +84,19 @@ public class MainActivity extends AppCompatActivity implements mediater{
     @Override
     public void responce(int position) {
 
-        frame2 fragment1=new frame2();
-        fragment1.setvalueofpositon(position);
-        transaction=fragmentManager.beginTransaction();
-        transaction.replace(R.id.rlayout, fragment1, "fragment");
-        transaction.commit();
+        if(position!=0) {
+            frame2 fragment1 = new frame2();
+            fragment1.setvalueofpositon(position-1);
+            transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.rlayout, fragment1, "fragment");
+            transaction.commit();
+        }
+        if(position==0)
+        {
+            transaction=fragmentManager.beginTransaction();
+            transaction.replace(R.id.rlayout,fragment,"frameactivity");
+            transaction.commit();
 
+        }
     }
 }

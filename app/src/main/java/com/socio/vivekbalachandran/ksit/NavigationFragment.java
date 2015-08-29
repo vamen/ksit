@@ -38,9 +38,7 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
             " Time Conversions",
             " Speed Conversions",
             " volume Conversion",
-            "XYZ",
-            "BULLSHIT",
-            "BLACKSHIP"
+
 
     };
     private DrawerLayout mdrawerlayout;
