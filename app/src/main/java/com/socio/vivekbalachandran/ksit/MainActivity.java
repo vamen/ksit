@@ -29,19 +29,23 @@ public class MainActivity extends AppCompatActivity implements Mediater {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_appbaroverlays);
+       //custom action bar tryed to follow designed guidelines but i was not yet pro then
         toolbar=(Toolbar)findViewById(R.id.act_bar);
 
         setSupportActionBar(toolbar);
       //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //get reference to navigation drawer
         drawer =(NavigationFragment)getSupportFragmentManager().findFragmentById(R.id.navigation);
 
         drawer.setup(R.id.navigation, (DrawerLayout) findViewById(R.id.nav_activity), toolbar);
-         fragment=new CurrencyConvertFragment();
+        //set currency convert fragment dynamically
+        fragment=new CurrencyConvertFragment();
          fragmentManager=getSupportFragmentManager();
          transaction=fragmentManager.beginTransaction();
         transaction.add(R.id.rlayout, fragment, "frameactivity");
         transaction.commit();
+        //open drawer when app is opened every  time
         if(savedInstanceState==null)
             drawer.opensorclose(true);
         Log.i("debug","oncreate");
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements Mediater {
 
     @Override
     public void responce(int position) {
-
+      //currency conversion has a separate fragment so if position 0 is handled separately
         if(position!=0) {
             MeasurementConverter fragment1 = new MeasurementConverter();
             fragment1.setvalueofpositon(position-1);
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements Mediater {
             transaction.commit();
         }
         if(position==0)
-        {
+        {//switch to currency conversion fragment
             transaction=fragmentManager.beginTransaction();
             transaction.replace(R.id.rlayout, fragment, "frameactivity");
             transaction.commit();

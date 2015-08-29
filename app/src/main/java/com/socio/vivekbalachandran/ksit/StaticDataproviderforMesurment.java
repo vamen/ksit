@@ -61,6 +61,7 @@ public  class StaticDataproviderforMesurment {
 
             }
     };
+    //an Array where one particular unit like meter,gram is taken as one as reference for all other conversions
      static double value[][]={
             { 1000, 100,1,0.001,0.000621,3.28084},
             {1,272.15,33.8},
@@ -80,36 +81,36 @@ public  class StaticDataproviderforMesurment {
                 return conv;
             }
             else {
-                Log.d("debug","***********debugger************");
+               //explicit hardcoding for temperature conversion c:celsius f:fahrenheit k:kelvin
                 if(pos1==0&&pos2==0)
                 {
-                    conv=init;
+                    conv=init;//c to c,
                 }
                 if(pos1==0&&pos2==1){
-                    conv=init+272.15;
+                    conv=init+272.15;//c to k
 
                 }
                 if(pos1==0&&pos2==2){
-                    conv=init*1.8+32;
+                    conv=init*1.8+32;//c to f
 
                 }
                 if(pos1==1&&pos2==0){
-                    conv=init-272.15;
+                    conv=init-272.15; //k to c
                 }
                 if(pos1==1&&pos2==1){
-                    conv=init;
+                    conv=init;//k to k
                 }
                 if(pos1==1&&pos2==2){
-                    conv=(init+273)*1.8+32;
+                    conv=(init+273)*1.8+32; //k to f
                 }
                 if(pos1==2&&pos2==0){
-                    conv=(init-32)/1.8;
+                    conv=(init-32)/1.8;  //f to c
                 }
                 if(pos1==2&&pos2==1){
-                    conv=((init-32)/1.8)+272.15;
+                    conv=((init-32)/1.8)+272.15; //f to k
                 }
                 if(pos1==2&&pos2==2){
-                    conv=init;
+                    conv=init;   //f to f
                 }
                 return conv;
             }

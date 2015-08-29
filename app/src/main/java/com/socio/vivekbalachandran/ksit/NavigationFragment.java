@@ -29,6 +29,7 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
     public static final String Key_User_Learnt_Drawer = "User_Learnt_Drawer";
     public static final String Pref_file_name = "testpref";
     public Myadapter myadapter;
+    //conversion types list
     public String[] conlist = {
             " Currency Conversions",
             " Length Conversions",
@@ -47,21 +48,21 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
     private boolean mfromsavedinstancestate;
     private View continerview;
     private RecyclerView recyclerView;
-    Mediater med;
+    Mediater med;//interface reference
     Context context;
     public NavigationFragment() {
         // Required empty public constructor
     }
-
-    public static void saveTopreference(Context context, String preferenceKey, boolean preferencevalue) {  //saving to sharedpreferance
+    //saving to sharedpreferance to check whether Drawer is called for first time
+    public static void saveTopreference(Context context, String preferenceKey, boolean preferencevalue) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(Pref_file_name, context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(preferenceKey, preferencevalue);
         editor.apply();
     }
-
+    //retrieving data from sharedpreffrence whether Drawer is called for first time
     public static boolean ReadFrompreference(Context context, String Preferencekey, boolean defaultvalue) {
-        //retrieving data from sharedpreffrence
+
         SharedPreferences sharedPreferences = context.getSharedPreferences(Pref_file_name, context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(Preferencekey, defaultvalue);
     }
@@ -92,6 +93,8 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
         myadapter = new Myadapter(getActivity(), conlist);
         recyclerView.setAdapter(myadapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        //code if divider b/w recycler view is required by using third party library
         /*recyclerView.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(getActivity())
                         .color(R.color.accent_material_dark)
@@ -99,7 +102,7 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
                         .marginResId(R.dimen.leftmargin, R.dimen.rightmargin)
                         .build());*/
 
-        Log.i("debug", "********oncreateview in navigation fragment*********");
+
         return rootview;
     }
     @Override
@@ -207,8 +210,8 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 int position = getAdapterPosition();
                 Toast.makeText(getActivity(), "hello at pos" + position, Toast.LENGTH_SHORT).show();
-
-                callinterface(position);
+                //call responce fo mediater interface override at MainActivity to change the fragments on clicking the respective conversion types on navigation fragment
+                med.responce(position);
 
             }
 
@@ -217,9 +220,6 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
 
 
     }
-    public void callinterface(int i)
-    {
-        med.responce(i);
-    }
+
 
 }

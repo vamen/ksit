@@ -22,7 +22,7 @@ import android.widget.Toast;
  */
 public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
 
-
+//Array for spinners
     public static String[] curencyString1 =
             {"INR",
                     "AUD", "BGN", "BRL", "CAD", "CHF",
@@ -118,7 +118,7 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
                 if (!inputtext.getText().toString().matches("")) {
                     double enetredvalue=Double.valueOf(inputtext.getText().toString());
 
-                    Toast.makeText(getActivity(), "clickedgo with value"+enetredvalue, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "clickedgo with value"+enetredvalue, Toast.LENGTH_SHORT).show();
                     double convertedvalue=ob.getConvalue(pos1, pos2,enetredvalue );
                     result.setText(String.valueOf(convertedvalue));
 
@@ -128,7 +128,7 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
                     double convertedvalue=ob.getConvalue(pos1, pos2, 1);
                     result.setText(String.valueOf(convertedvalue));
 
-                    Toast.makeText(getActivity(), "clickedgo with null string", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "clickedgo with null string", Toast.LENGTH_SHORT).show();
                 }
             }
         });
