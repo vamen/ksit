@@ -25,16 +25,19 @@ import java.net.URL;
 
 /**
  * Created by Vivek Balachandran on 8/10/2015.
+ * singleton class that handles network calls for getting current day foreign exchange rates from fixar.io
  */
 public  class Dataprovider implements Runnable {
 
-
+    //Array that store the current day Foreign exchange rates
     public static double value[] = new double[32];
 
     URL url;
+    //single instance
     public static Dataprovider instance=null;
     HttpURLConnection urlConnection;
     String datacaststring;
+    //file name where data obtained from Internet is stored.
     final static String filename="valuefile.txt";
     Context ctx;
 
@@ -53,22 +56,27 @@ public  class Dataprovider implements Runnable {
     private Dataprovider(Context ctx, Bundle savedInstancestate)
     {
         this.ctx=ctx;
-
+        //if the application is opened first time then dont read data from the file.
              if(getPreferencestatus()) {
                 run();
-                 Log.e("debug", "************datagetting***********");
+               //  Log.e("debug", "************datagetting***********");
              }
     }
-
+    //functions that returns true when  file valuefile exists and data is stored in it
     private boolean getPreferencestatus() {
 
-        Log.e("debug", "************datagetting***********");
+        //Log.e("debug", "************datagetting***********");
         SharedPreferences preferences=ctx.getSharedPreferences("START",Context.MODE_PRIVATE);
         boolean ischecked=preferences.getBoolean("STARTKEY", false);
-        SharedPreferences.Editor editor=preferences.edit();
-        editor.putBoolean("STARTKEY",true);
-        editor.commit();
+
         return ischecked;
+    }
+    //function that stores true into shared preference when data is stored into value file
+    private void setpreferencestatus()
+    { SharedPreferences preferences=ctx.getSharedPreferences("START",Context.MODE_PRIVATE);
+      SharedPreferences.Editor editor=preferences.edit();
+      editor.putBoolean("STARTKEY",true);
+        editor.commit();
     }
 
     private Dataprovider()
@@ -78,7 +86,7 @@ public  class Dataprovider implements Runnable {
 
    public  void ncalls(){new netcalls().execute();
     }
-
+//writing data obtained from Internet to file.
    public void writefile(double value[])
    {
 
@@ -91,6 +99,7 @@ public  class Dataprovider implements Runnable {
               dataOutputStream.writeDouble(value[i]);
 
           }
+         setpreferencestatus();
 
        } catch (FileNotFoundException e) {
            e.printStackTrace();
@@ -108,7 +117,7 @@ public  class Dataprovider implements Runnable {
            }
        }
    }
-
+//reading data stored in valuefile.txt
    public void readvalue(double[] value)
    {
        FileInputStream fileInputStream=null;
@@ -142,12 +151,13 @@ public  class Dataprovider implements Runnable {
            }
        }
    }
-
+   //simple function that returns the currency converted value
    public double getConvalue(int position1,int position2,double invalue)
    {
 
-       Log.d("EDITTEXT DEBUG",position1+"/"+invalue+"/"+position2+"/="+value[position2]);
-             return     (invalue/value[position1])*value[position2];
+      // Log.d("EDITTEXT DEBUG",position1+"/"+invalue+"/"+position2+"/="+value[position2]);
+                       //INR vallue is the reference value taken 1 relative to it value b/w any two currency unit is obtained
+             return     (invalue/value[position1])*value[position2];//(Design Technique:'Time and space trade off')
 
 
 
@@ -155,13 +165,14 @@ public  class Dataprovider implements Runnable {
    }
 
     @Override
+    //function is called every time the  MainActivity is opened
     public void run() {
         android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
         readvalue(value);
         Log.d("ONBackground","executing");
 
     }
-
+//class that handles the network calls using AsyncTask, since Internet is used for very short amount of time.
     public  class netcalls extends AsyncTask {
 
         public   netcalls()
@@ -171,6 +182,7 @@ public  class Dataprovider implements Runnable {
       @Override
       protected Object doInBackground(Object[] params) {
           try {
+              //Current day Foreign Exchange rate obtained from fixer.io
               url = new URL("http://api.fixer.io/latest?base=INR");
               urlConnection = (HttpURLConnection) url.openConnection();
               urlConnection.setRequestMethod("GET");
@@ -187,6 +199,8 @@ public  class Dataprovider implements Runnable {
                   datacaststring = null;
 
               Log.d("DEBUGDATA",stringBuffer.toString());
+             //Data obtained from the NET will be in JSON format which is read as String
+             //following function is used to extract the specific data from the JSON string
               jsonformater(stringBuffer.toString());
 
 
@@ -214,9 +228,10 @@ public  class Dataprovider implements Runnable {
           return null;
       }
   }
+    //This function is used to extract the specific data from the JSON string and writing to valuefile.txt
     public void jsonformater(String data) throws JSONException {
 
-        Log.d("DEBUGJSON","jsonformater function called");
+       // Log.d("DEBUGJSON","jsonformater function called");
 
         JSONObject JSONdatacastobject = new JSONObject(data);
         JSONObject jsonsubobject = JSONdatacastobject.getJSONObject("rates");
@@ -252,10 +267,10 @@ public  class Dataprovider implements Runnable {
         value[29] = jsonsubobject.getDouble("USD");
         value[30] = jsonsubobject.getDouble("ZAR");
         value[31] = jsonsubobject.getDouble("EUR");
-        Log.d("VALUE OF USD","****"+value[29]+"****");
-        Log.d("FILEI/O","Writing to file");
+        //Log.d("VALUE OF USD","****"+value[29]+"****");
+       // Log.d("FILEI/O","Writing to file");
         writefile(value);
-        Log.d("FILEI/O","Wrote to file");
+       // Log.d("FILEI/O","Wrote to file");
         return;
     }
 }

@@ -65,7 +65,7 @@ public class MeasurementConverter extends android.support.v4.app.Fragment {
         text1 = (TextView) root.findViewById(R.id.textView1);
         text1.setText(conlist[conposition]);
 
-        //spinners for selecting the units for converssion
+        //spinners for selecting the units for conversion
         android.support.v7.widget.AppCompatSpinner spinner1 = (android.support.v7.widget.AppCompatSpinner) root.findViewById(R.id.conspinner);
 
         //common array adapter for bot spinners
@@ -114,12 +114,12 @@ public class MeasurementConverter extends android.support.v4.app.Fragment {
                 //if the entered string is not null
                 if (!editText.getText().toString().matches("")) {
 
-                    //get the entered value
+                    //get the entered value in double
                     double enetredvalue = Double.valueOf(editText.getText().toString());
 
                     //Toast.makeText(getActivity(), "clickedgo with value " + enetredvalue, Toast.LENGTH_SHORT).show();
 
-                    //getconvertval function that gets the converted value
+                    //getconvertval function of StaticDataproviderforMesurement class that gets the converted value
                     double convertedvalue = StaticDataproviderforMesurment.getconvertval(enetredvalue, conposition, pos1, pos2);
                     textView.setText(String.valueOf(convertedvalue));
 
