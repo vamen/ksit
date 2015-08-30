@@ -209,7 +209,8 @@ public class NavigationFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 int position = getAdapterPosition();
-                Toast.makeText(getActivity(), "hello at pos" + position, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), "hello at pos" + position, Toast.LENGTH_SHORT).show();
+
                 //call responce fo mediater interface override at MainActivity to change the fragments on clicking the respective conversion types on navigation fragment
                 med.responce(position);
 

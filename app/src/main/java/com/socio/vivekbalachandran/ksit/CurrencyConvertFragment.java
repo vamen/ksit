@@ -32,6 +32,7 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
                     "RON", "RUB", "SEK", "SGD", "THB", "TRY",
                     "USD", "ZAR", "EUR"
             };
+
     //position of selected item in spinner 1
     public static int pos1 = 0;
     //position of selected item in spinner 1
@@ -41,7 +42,7 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
     Dataprovider ob;
    //View object that is used to store or reference xml layout
     View root;
-
+    TextView dateText;
 
     public CurrencyConvertFragment() {
         // Required empty public constructor
@@ -66,7 +67,10 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
         inputtext.setHint("1");
         //Textview where result of the conversion is stored
         final TextView result = (TextView) root.findViewById(R.id.outputtext);
-//        int val=Integer.parseInt((String)inputtext.getText().toString());
+
+        //TextView the Displays last date when currency exchange rate is read.
+        dateText=(TextView)root.findViewById(R.id.dateorerror);
+
 
         //spinners for selecting the units for converssion
         android.support.v7.widget.AppCompatButton button = (android.support.v7.widget.AppCompatButton) root.findViewById(R.id.view2);
@@ -78,8 +82,9 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "pos" + position + curencyString1[position], Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "pos" + position + curencyString1[position], Toast.LENGTH_SHORT).show();
                 pos1 = position;
+
 
             }
 
@@ -95,7 +100,7 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "pos" + position + curencyString1[position], Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "pos" + position + curencyString1[position], Toast.LENGTH_SHORT).show();
                 pos2 = position;
             }
 
@@ -113,8 +118,8 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
                 if (actionId == EditorInfo.IME_ACTION_GO) {
                     double convertedvalue = ob.getConvalue(pos1, pos2, Double.valueOf(inputtext.getText().toString()));
                     result.setText(String.valueOf(convertedvalue));
-                    Toast.makeText(getActivity(), "enter Done", Toast.LENGTH_SHORT).show();
-                    Log.d("oNeditif", "inside if listner");
+                    //Toast.makeText(getActivity(), "enter Done", Toast.LENGTH_SHORT).show();
+                    //Log.d("oNeditif", "inside if listner");
                     return true;
                 }
                 return false;
@@ -132,16 +137,19 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
                     //Toast.makeText(getActivity(), "clickedgo with value"+enetredvalue, Toast.LENGTH_SHORT).show();
 
                     //getconvalue function of Dataprovider class that gets the converted value
-                    double convertedvalue = ob.getConvalue(pos1, pos2, enetredvalue);
-                    result.setText(String.valueOf(convertedvalue));
+                    if(!ob.get_date().matches("")) {
+                        double convertedvalue = ob.getConvalue(pos1, pos2, enetredvalue);
+                        result.setText(String.valueOf(convertedvalue));
 
+                        dateText.setText("currency Exchange rate as on "+ob.get_date()+". \n * for latest Rates click refresh icon on top");
+                    }
+                    else {
+                        dateText.setText("No data avilable, please click the refresh Icon on top and make shure that INTERNET is 'ON'");
+                            }
                 }//if the entered string is null take 1 the default value(when 'go' is pressed with out entering nothing
                 else if (inputtext.getText().toString().matches("")) {
 
-                    double convertedvalue = ob.getConvalue(pos1, pos2, 1);
-                    result.setText(String.valueOf(convertedvalue));
-
-                    //Toast.makeText(getActivity(), "clickedgo with null string", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getActivity(), "Please enter some value bellow from", Toast.LENGTH_SHORT).show();
                 }
             }
         });

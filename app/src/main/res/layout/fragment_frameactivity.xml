@@ -141,6 +141,17 @@
             android:layout_alignParentTop="true"
             android:textStyle="italic"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textSize="15dp"
+            android:id="@+id/dateorerror"
+            android:layout_below="@+id/wrapper2"
+            android:layout_alignLeft="@+id/wrapper2"
+            android:layout_alignStart="@+id/wrapper2"
+            android:layout_marginTop="67dp" />
+
 
     </RelativeLayout>
 

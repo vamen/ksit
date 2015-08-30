@@ -22,6 +22,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Vivek Balachandran on 8/10/2015.
@@ -40,7 +43,7 @@ public  class Dataprovider implements Runnable {
     //file name where data obtained from Internet is stored.
     final static String filename="valuefile.txt";
     Context ctx;
-
+    public String LastWriteday;
     public static Dataprovider getInstence(Context ctx,Bundle savedInstancestate)
     {
 
@@ -270,7 +273,25 @@ public  class Dataprovider implements Runnable {
         //Log.d("VALUE OF USD","****"+value[29]+"****");
        // Log.d("FILEI/O","Writing to file");
         writefile(value);
+        store_date();
        // Log.d("FILEI/O","Wrote to file");
         return;
+    }
+
+    private void store_date() {
+        DateFormat dateFormat=new SimpleDateFormat("dd-MMMM-yyyy");
+        Date date=new Date();
+        LastWriteday=dateFormat.format(date);
+        SharedPreferences preferences=ctx.getSharedPreferences("START",ctx.MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("DATE",LastWriteday);
+        editor.apply();
+    }
+
+    public  String get_date()
+    {
+        SharedPreferences preferences=ctx.getSharedPreferences("START",ctx.MODE_PRIVATE);
+        String date=preferences.getString("DATE", "");
+        return  date;
     }
 }
