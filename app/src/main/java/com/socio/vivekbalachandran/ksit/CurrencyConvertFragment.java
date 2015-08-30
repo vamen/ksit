@@ -24,13 +24,38 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
 
     //Array for spinners that displays currency units
     public static String[] curencyString1 =
-            {"INR",
-                    "AUD", "BGN", "BRL", "CAD", "CHF",
-                    "CNY", "CZK", "DKK", "GBP", "HKD",
-                    "HRK", "HUF", "IDR", "ILS", "JPY", "KRW",
-                    "MXN", "MYR", "NOK", "NZK", "PHP", "PLN",
-                    "RON", "RUB", "SEK", "SGD", "THB", "TRY",
-                    "USD", "ZAR", "EUR"
+            {"INR:Indian Rupee",
+                    "AUD: Australian Dollar",
+                    "BGN:Bulgarian lev",
+                    "BRL Brazilian real",
+                    "CAD:Canadian Dollar",
+                    "CHF:Swiss franc",
+                    "CNY:Chinese Yuan",
+                    "CZK:Czech Republic Koruna",
+                    "DKK:Danish Krone",
+                    "GBP:Great British Pound",
+                    "HKD:Hong Kong Dollar",
+                    "HRK:Croatian Kuna",
+                    "HUF:Hungarian Forint",
+                    "IDR:Indonesian Rupiah",
+                    "ILS:Israeli New Sheqel",
+                    "JPY:Japanese Yen ",
+                    "KRW:South Korean Won",
+                    "MXN:Mexican Peso ",
+                    "MYR:Malaysian Ringgit",
+                    "NOK: Norwegian Krone",
+                    "NZD: New Zealand Dollar",
+                    "PHP:Philippine Peso",
+                    "PLN:Polish Zloty ",
+                    "RON:Romanian Leu",
+                    "RUB:Russian Ruble ",
+                    "SEK:Swedish Krona",
+                    "SGD:Singapore Dollar",
+                    "THB:Thai Baht",
+                    "TRY:Turkish Lira",
+                    "USD:US Doller",
+                    "ZAR:South African Rand",
+                    "EUR: Euro"
             };
 
     //position of selected item in spinner 1
