@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Vivek Balachandran on 8/28/2015.
  */
@@ -112,6 +114,7 @@ public class MeasurementConverter extends android.support.v4.app.Fragment {
             public void onClick(View v) {
 
                 //if the entered string is not null
+                DecimalFormat df= new DecimalFormat("0.000000");
                 if (!editText.getText().toString().matches("")) {
 
                     //get the entered value in double
@@ -121,14 +124,16 @@ public class MeasurementConverter extends android.support.v4.app.Fragment {
 
                     //getconvertval function of StaticDataproviderforMesurement class that gets the converted value
                     double convertedvalue = StaticDataproviderforMesurment.getconvertval(enetredvalue, conposition, pos1, pos2);
-                    textView.setText(String.valueOf(convertedvalue));
+
+                    textView.setText(df.format(convertedvalue));
 
                 }
                 //if the entered string is null take 1 the default value
                 else if (editText.getText().toString().matches("")) {
 
                     double convertedvalue = StaticDataproviderforMesurment.getconvertval(1, conposition, pos1, pos2);
-                    textView.setText(String.valueOf(convertedvalue));
+
+                    textView.setText(df.format(convertedvalue));
 
                     //Toast.makeText(getActivity(), "clickedgo with null string", Toast.LENGTH_SHORT).show();
                 }

@@ -22,6 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -90,7 +91,7 @@ public  class Dataprovider implements Runnable {
    public  void ncalls(){new netcalls().execute();
     }
 //writing data obtained from Internet to file.
-   public void writefile(double value[])
+   public boolean writefile(double value[])
    {
 
        FileOutputStream fileOutputStream=null;
@@ -102,13 +103,15 @@ public  class Dataprovider implements Runnable {
               dataOutputStream.writeDouble(value[i]);
 
           }
-         setpreferencestatus();
+
 
        } catch (FileNotFoundException e) {
            e.printStackTrace();
            Log.d("FILE", "file not found");
+           return false;
        } catch (IOException e) {
            e.printStackTrace();
+           return false;
        }
 
        finally {
@@ -119,40 +122,43 @@ public  class Dataprovider implements Runnable {
                e.printStackTrace();
            }
        }
+       return true;
    }
 //reading data stored in valuefile.txt
    public void readvalue(double[] value)
    {
-       FileInputStream fileInputStream=null;
-       byte[] b=new byte[Dataprovider.value.length];
-       Log.d("FILEI/O","reading from file");
-       try {
-           fileInputStream=ctx.openFileInput(filename);
-           double read;
-           DataInputStream dataInputStream=new DataInputStream(fileInputStream);
-           for (int i=0;i< Dataprovider.value.length;i++) {
-               read =dataInputStream.readDouble();
-               if (read == -1) {
-                   Log.d("FILE", filename + " is empty");
-                   i= Dataprovider.value.length;
 
-               } else {
-                   Dataprovider.value[i] = read;
-
-               }
-           }
-       } catch (FileNotFoundException e) {
-           e.printStackTrace();
-       } catch (IOException e) {
-           e.printStackTrace();
-       }finally {
+           FileInputStream fileInputStream = null;
+           byte[] b = new byte[Dataprovider.value.length];
+           Log.d("FILEI/O", "reading from file");
            try {
-               fileInputStream.close();
-               Log.d("FILEI/O","read from file");
+               fileInputStream = ctx.openFileInput(filename);
+               double read;
+               DataInputStream dataInputStream = new DataInputStream(fileInputStream);
+               for (int i = 0; i < Dataprovider.value.length; i++) {
+                   read = dataInputStream.readDouble();
+                   if (read == -1) {
+                       Log.d("FILE", filename + " is empty");
+                       i = Dataprovider.value.length;
+
+                   } else {
+                       Dataprovider.value[i] = read;
+
+                   }
+               }
+           } catch (FileNotFoundException e) {
+               e.printStackTrace();
            } catch (IOException e) {
                e.printStackTrace();
+           } finally {
+               try {
+                   fileInputStream.close();
+                   Log.d("FILEI/O", "read from file");
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }
            }
-       }
+
    }
    //simple function that returns the currency converted value
    public double getConvalue(int position1,int position2,double invalue)
@@ -160,6 +166,7 @@ public  class Dataprovider implements Runnable {
 
       // Log.d("EDITTEXT DEBUG",position1+"/"+invalue+"/"+position2+"/="+value[position2]);
                        //INR vallue is the reference value taken 1 relative to it value b/w any two currency unit is obtained
+
              return     (invalue/value[position1])*value[position2];//(Design Technique:'Time and space trade off')
 
 
@@ -192,6 +199,7 @@ public  class Dataprovider implements Runnable {
               urlConnection.connect();
 
               InputStream inputStream = urlConnection.getInputStream();
+              Log.d("neteeork acess done","done");
               BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
               StringBuffer stringBuffer = new StringBuffer();
               String line;
@@ -201,23 +209,27 @@ public  class Dataprovider implements Runnable {
               if (inputStream == null)
                   datacaststring = null;
 
-              Log.d("DEBUGDATA",stringBuffer.toString());
+             // Log.d("DEBUGDATA",stringBuffer.toString());
              //Data obtained from the NET will be in JSON format which is read as String
              //following function is used to extract the specific data from the JSON string
               jsonformater(stringBuffer.toString());
 
 
-          } catch (MalformedURLException e) {
+          }catch (UnknownHostException e)
+          {
+           Log.d("NO network ","intrnet is not on");
+          }
+          catch (MalformedURLException e) {
 
-              Log.d("NO NETWORK ", "" + e);
+              Log.d("NO NETWORK CALL", "" + e);
               e.printStackTrace();
           } catch (ProtocolException e) {
 
               e.printStackTrace();
-              Log.d("NO NETWORK ", "" + e);
+              Log.d("NO NETWORK  access", "" + e);
           } catch (IOException e) {
               e.printStackTrace();
-              Log.d("NO NETWORK ", "" + e);
+              Log.d("NO NETWORK streem error", "" + e);
           } catch (JSONException e) {
               e.printStackTrace();
           } finally {
@@ -272,13 +284,17 @@ public  class Dataprovider implements Runnable {
         value[31] = jsonsubobject.getDouble("EUR");
         //Log.d("VALUE OF USD","****"+value[29]+"****");
        // Log.d("FILEI/O","Writing to file");
-        writefile(value);
-        store_date();
+        if(writefile(value))
+        {
+            store_date();
+            setpreferencestatus();
+        }
        // Log.d("FILEI/O","Wrote to file");
         return;
     }
 
     private void store_date() {
+
         DateFormat dateFormat=new SimpleDateFormat("dd-MMMM-yyyy");
         Date date=new Date();
         LastWriteday=dateFormat.format(date);

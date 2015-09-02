@@ -24,7 +24,8 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
 
     //Array for spinners that displays currency units
     public static String[] curencyString1 =
-            {"INR:Indian Rupee",
+            {
+                    "INR:Indian Rupee",
                     "AUD: Australian Dollar",
                     "BGN:Bulgarian lev",
                     "BRL Brazilian real",
@@ -164,7 +165,7 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
                     //getconvalue function of Dataprovider class that gets the converted value
                     if(!ob.get_date().matches("")) {
                         double convertedvalue = ob.getConvalue(pos1, pos2, enetredvalue);
-                        result.setText(String.valueOf(convertedvalue));
+                        result.setText(String.format( "%.5f", convertedvalue ));
 
                         dateText.setText("currency Exchange rate as on "+ob.get_date()+". \n * for latest Rates click refresh icon on top");
                     }
