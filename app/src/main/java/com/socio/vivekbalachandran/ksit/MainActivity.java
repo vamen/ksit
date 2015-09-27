@@ -39,16 +39,17 @@ public class MainActivity extends AppCompatActivity implements Mediater {
         drawer =(NavigationFragment)getSupportFragmentManager().findFragmentById(R.id.navigation);
 
         drawer.setup(R.id.navigation, (DrawerLayout) findViewById(R.id.nav_activity), toolbar);
+                if(savedInstanceState==null)
+            drawer.opensorclose(true);
         //set currency convert fragment dynamically
+
         fragment=new CurrencyConvertFragment();
          fragmentManager=getSupportFragmentManager();
          transaction=fragmentManager.beginTransaction();
         transaction.add(R.id.rlayout, fragment, "frameactivity");
         transaction.commit();
-        //open drawer when app is opened every  time
-        if(savedInstanceState==null)
-            drawer.opensorclose(true);
-        Log.i("debug","oncreate");
+
+
 
     }
 

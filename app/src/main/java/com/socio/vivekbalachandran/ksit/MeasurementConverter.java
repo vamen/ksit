@@ -1,9 +1,11 @@
 package com.socio.vivekbalachandran.ksit;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -108,7 +110,6 @@ public class MeasurementConverter extends android.support.v4.app.Fragment {
 
             }
         });
-
         appCompatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,7 +126,7 @@ public class MeasurementConverter extends android.support.v4.app.Fragment {
                     //getconvertval function of StaticDataproviderforMesurement class that gets the converted value
                     double convertedvalue = StaticDataproviderforMesurment.getconvertval(enetredvalue, conposition, pos1, pos2);
 
-                    textView.setText(df.format(convertedvalue));
+                    textView.setText(String.format("%.6f",convertedvalue));
 
                 }
                 //if the entered string is null take 1 the default value
@@ -138,7 +139,8 @@ public class MeasurementConverter extends android.support.v4.app.Fragment {
                     //Toast.makeText(getActivity(), "clickedgo with null string", Toast.LENGTH_SHORT).show();
                 }
 
-
+                InputMethodManager mgr = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                mgr.hideSoftInputFromWindow(editText.getWindowToken(), 0);
                // Toast.makeText(getActivity(), " " + StaticDataproviderforMesurment.data[conposition][pos1] +
                  //       " to " + StaticDataproviderforMesurment.data[conposition][pos2], Toast.LENGTH_SHORT).show();
             }

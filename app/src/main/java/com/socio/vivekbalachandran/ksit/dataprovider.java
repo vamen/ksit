@@ -179,7 +179,6 @@ public  class Dataprovider implements Runnable {
     public void run() {
         android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
         readvalue(value);
-        Log.d("ONBackground","executing");
 
     }
 //class that handles the network calls using AsyncTask, since Internet is used for very short amount of time.

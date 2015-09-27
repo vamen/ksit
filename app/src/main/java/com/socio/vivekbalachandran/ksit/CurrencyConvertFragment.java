@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -177,6 +178,8 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
 
                    Toast.makeText(getActivity(), "Please enter some value bellow from", Toast.LENGTH_SHORT).show();
                 }
+                InputMethodManager mgr = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                mgr.hideSoftInputFromWindow(inputtext.getWindowToken(), 0);
             }
         });
     }
