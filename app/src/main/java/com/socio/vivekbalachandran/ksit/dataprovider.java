@@ -45,6 +45,7 @@ public  class Dataprovider implements Runnable {
     final static String filename="valuefile.txt";
     Context ctx;
     public String LastWriteday;
+    Databasecontract databasecontract;
     public static Dataprovider getInstence(Context ctx,Bundle savedInstancestate)
     {
 
@@ -60,11 +61,12 @@ public  class Dataprovider implements Runnable {
     private Dataprovider(Context ctx, Bundle savedInstancestate)
     {
         this.ctx=ctx;
-        //if the application is opened first time then dont read data from the file.
+        //if the application is opened first time then donot read data from the file.
              if(getPreferencestatus()) {
                 run();
                //  Log.e("debug", "************datagetting***********");
              }
+        databasecontract=new Databasecontract(ctx);
     }
     //functions that returns true when  file valuefile exists and data is stored in it
     private boolean getPreferencestatus() {
@@ -212,7 +214,8 @@ public  class Dataprovider implements Runnable {
              //Data obtained from the NET will be in JSON format which is read as String
              //following function is used to extract the specific data from the JSON string
               jsonformater(stringBuffer.toString());
-
+              databasecontract.staticjsonformater(stringBuffer.toString());
+              databasecontract.qeerythedata(0);
 
           }catch (UnknownHostException e)
           {

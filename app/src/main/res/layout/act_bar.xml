@@ -4,5 +4,6 @@
     android:layout_height="wrap_content"
     android:background="@color/primarycolor"
     android:theme="@style/Mycolorstyle"
+    android:popupTheme="@style/AppTheme"
 
     />
