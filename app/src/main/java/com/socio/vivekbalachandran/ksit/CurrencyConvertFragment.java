@@ -88,7 +88,7 @@ public class CurrencyConvertFragment extends android.support.v4.app.Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //obtain an instance from dataprovider single ton class
-        ob = Dataprovider.getInstence(getActivity().getApplicationContext(), savedInstanceState);
+        ob = Dataprovider.getInstence(getActivity().getApplicationContext());
         //edittext where currency input is read
         final EditText inputtext = (EditText) root.findViewById(R.id.inputText);
         inputtext.setHint("1");

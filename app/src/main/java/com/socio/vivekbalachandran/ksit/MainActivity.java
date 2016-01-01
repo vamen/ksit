@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements Mediater {
 
         }
         if (id == R.id.refresh) {
-             getInstence(getBaseContext(),savestate).ncalls();
+             getInstence(getBaseContext()).ncalls();
             Toast.makeText(this,"refreshed",Toast.LENGTH_SHORT).show();
         }
 

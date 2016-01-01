@@ -46,19 +46,19 @@ public  class Dataprovider implements Runnable {
     Context ctx;
     public String LastWriteday;
     Databasecontract databasecontract;
-    public static Dataprovider getInstence(Context ctx,Bundle savedInstancestate)
+    public static Dataprovider getInstence(Context ctx)
     {
 
         if(instance==null)
         {
-            instance=new Dataprovider(ctx,savedInstancestate);
+            instance=new Dataprovider(ctx);
             return instance;
         }
 
         return instance;
     }
 
-    private Dataprovider(Context ctx, Bundle savedInstancestate)
+    private Dataprovider(Context ctx)
     {
         this.ctx=ctx;
         //if the application is opened first time then donot read data from the file.
@@ -215,7 +215,7 @@ public  class Dataprovider implements Runnable {
              //following function is used to extract the specific data from the JSON string
               jsonformater(stringBuffer.toString());
               databasecontract.staticjsonformater(stringBuffer.toString());
-              databasecontract.qeerythedata(0);
+//              databasecontract.qeerythedata(0);
 
           }catch (UnknownHostException e)
           {

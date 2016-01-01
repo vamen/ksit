@@ -60,7 +60,7 @@ public class Databasecontract {
     public Cursor qeerythedata(int day) {
         SQLiteDatabase mdatabase = db.getReadableDatabase();
         Cursor cursor=mdatabase.query(true, TABLE1, null, null, null, null, null, null, null);
-        Log.d("cursor","**"+cursor.getString(0)+"###" );
+//        Log.d("cursor","**"+cursor.getString(0)+"###" );
         return cursor;
     }
 
